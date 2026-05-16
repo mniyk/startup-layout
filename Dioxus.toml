@@ -1,0 +1,6 @@
+[application]
+name = "startup-layout"
+default_platform = "desktop"
+
+[bundle]
+identifier = "com.mniyk.startup-layout"
