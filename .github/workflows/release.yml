@@ -30,11 +30,11 @@ jobs:
       - name: Package
         shell: pwsh
         run: |
-          $exe = Get-ChildItem -Path target -Filter "startup-layout.exe" -Recurse |
-            Where-Object { $_.FullName -match "dx" -and $_.FullName -match "release" } |
+          $zip = Get-ChildItem -Path target -Filter "*.zip" -Recurse |
+            Where-Object { $_.FullName -match "dx" } |
             Select-Object -First 1
-          if (-not $exe) { throw "binary not found" }
-          Compress-Archive -Path "$($exe.DirectoryName)\*" -DestinationPath "startup-layout-windows-x86_64.zip"
+          if (-not $zip) { throw "bundle zip not found" }
+          Copy-Item $zip.FullName -Destination "startup-layout-windows-x86_64.zip"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
